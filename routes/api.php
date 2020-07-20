@@ -15,7 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('authenticate', 'Api\SessionController@authenticate');
+Route::get('/', function (){
+
+    echo "hello";
+
+});
+Route::post('authenticate', 'Api\AuthController@authenticate');
+Route::post('register', 'Api\AuthController@register');
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
