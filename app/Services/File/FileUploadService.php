@@ -6,7 +6,7 @@ namespace App\Services\File;
 
 use App\Models\File;
 
-class Upload
+class FileUploadService
 {
 
     private $path;

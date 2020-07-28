@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IngredientRequest;
 use App\Models\Ingredient;
-use App\Services\File\Upload;
+use App\Services\File\FileUploadService;
+use App\Services\Ingredient\IngredientCreateService;
 use Illuminate\Http\Request;
 
 class IngredientController extends Controller
@@ -30,17 +31,9 @@ class IngredientController extends Controller
      */
     public function store(IngredientRequest $request)
     {
+        $ingredient = new IngredientCreateService($request);
 
-        $path = 'ingredients';
-
-        $image = new Upload($path, $request->file('image'));
-
-        $ingredient = Ingredient::create([
-            'name' => $request->name,
-            'image_id' => $image()->id,
-        ]);
-
-        return response()->json($ingredient, 201);
+        return response()->json($ingredient(), 201);
     }
 
     /**

@@ -5,9 +5,9 @@ namespace App\Services\Ingredient;
 
 
 use App\Models\Ingredient;
-use App\Services\File\Upload;
+use App\Services\File\FileUploadService;
 
-class Create
+class IngredientCreateService
 {
     private $request;
    public function __construct($request)
@@ -24,7 +24,7 @@ class Create
    {
        $path = 'ingredients';
 
-       $image = new Upload($path, $this->request->file('image'));
+       $image = new FileUploadService($path, $this->request->file('image'));
 
        return $this->create($image()->id);
    }
