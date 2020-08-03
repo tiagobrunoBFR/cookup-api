@@ -33,7 +33,6 @@ class AuthController extends Controller
         }
 
         return $this->respondWithToken($token);
-
     }
 
     protected function respondWithToken($token)

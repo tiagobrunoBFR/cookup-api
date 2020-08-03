@@ -18,13 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::post('authenticate', 'Api\AuthController@authenticate');
 Route::post('register', 'Api\AuthController@register');
 
-Route::middleware('auth:api')->prefix('v1')->namespace('Api')->group(function (){
+Route::middleware('auth:api')->prefix('v1')->namespace('Api')->group(function () {
 
-    Route::prefix('admin')->namespace('Admin')->group(function (){
+    Route::prefix('admin')->namespace('Admin')->group(function () {
 
         Route::post('ingredients', 'IngredientController@store');
-
-
     });
-
 });

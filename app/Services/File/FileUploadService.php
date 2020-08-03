@@ -1,8 +1,5 @@
 <?php
-
-
 namespace App\Services\File;
-
 
 use App\Models\File;
 
@@ -42,6 +39,4 @@ class FileUploadService
             'size' => $this->file->getSize()
         ]);
     }
-
-
 }

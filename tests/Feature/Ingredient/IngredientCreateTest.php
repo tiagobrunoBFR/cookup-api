@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
 
-class IngredientTest extends TestCase
+class IngredientCreateTest extends TestCase
 {
 
     use RefreshDatabase;
@@ -44,8 +44,27 @@ class IngredientTest extends TestCase
         $this->assertDatabaseHas('ingredients', [
             'name' => 'salt',
         ]);
+    }
+
+    /**
+     * @test
+     */
+    public function should_return_a_status_code_422_when_name_of_ingredient_exists_in_database()
+    {
+
+        $data = [
+            'name' => 'salt',
+            'image' => $this->image
+        ];
+
+        $this->post($this->baseUrl, $data);
+
+        $response = $this->post($this->baseUrl, $data);
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors('name');
 
     }
+
 
     /**
      * @test
