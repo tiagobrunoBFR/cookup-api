@@ -20,8 +20,5 @@ Route::post('register', 'Api\AuthController@register');
 
 Route::middleware('auth:api')->prefix('v1')->namespace('Api')->group(function () {
 
-    Route::prefix('admin')->namespace('Admin')->group(function () {
-
-        Route::post('ingredients', 'IngredientController@store');
-    });
+    Route::apiResource('ingredients', 'IngredientController');
 });

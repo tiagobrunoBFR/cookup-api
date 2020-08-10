@@ -18,7 +18,7 @@ class IngredientCreateTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->baseUrl = '/api/v1/admin/ingredients';
+        $this->baseUrl = $this::BASE_URL.$this::INGREDIENTS;
         $this->withErrors();
         $this->signIn();
         Storage::fake('public');

@@ -1,22 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Api\Admin;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IngredientRequest;
-use App\Models\Ingredient;
-use App\Services\File\FileUploadService;
-use App\Services\Ingredient\IngredientService;
+use App\Services\Ingredient\IngredientCreateService;
 use Illuminate\Http\Request;
 
 class IngredientController extends Controller
 {
 
-    private $ingredientService;
-    public function __construct(IngredientService $ingredientService)
-    {
-        $this->ingredientService = $ingredientService;
-    }
 
     /**
      * Display a listing of the resource.
@@ -31,12 +24,13 @@ class IngredientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param IngredientRequest $request
+     * @param IngredientCreateService $ingredientCreateService
      * @return \Illuminate\Http\Response
      */
-    public function store(IngredientRequest $request)
+    public function store(IngredientRequest $request, IngredientCreateService $ingredientCreateService)
     {
-        $ingredient = $this->ingredientService->create($request);
+        $ingredient = $ingredientCreateService->create($request->name, $request->file('image'));
 
         return response()->json($ingredient, 201);
     }
