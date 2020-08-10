@@ -6,12 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\IngredientRequest;
 use App\Models\Ingredient;
 use App\Services\File\FileUploadService;
-use App\Services\Ingredient\IngredientCreateService;
+use App\Services\Ingredient\IngredientService;
 use Illuminate\Http\Request;
 
 class IngredientController extends Controller
 {
 
+    private $ingredientService;
+    public function __construct(IngredientService $ingredientService)
+    {
+        $this->ingredientService = $ingredientService;
+    }
 
     /**
      * Display a listing of the resource.
@@ -31,9 +36,9 @@ class IngredientController extends Controller
      */
     public function store(IngredientRequest $request)
     {
-        $ingredient = new IngredientCreateService($request);
+        $ingredient = $this->ingredientService->create($request);
 
-        return response()->json($ingredient(), 201);
+        return response()->json($ingredient, 201);
     }
 
     /**
