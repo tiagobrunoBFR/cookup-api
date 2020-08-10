@@ -17,3 +17,8 @@ Cookup is a api for create and share of recipes
 ## Run Tests
 
 - php artisan test
+
+
+## Github Action 
+
+<p><img src="https://github.com/tiagobrunoBFR/cookup-api/workflows/Laravel%20Workflow/badge.svg"> </p>

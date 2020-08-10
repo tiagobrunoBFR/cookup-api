@@ -10,7 +10,6 @@
     <file>routes</file>
 <!--    <file>tests</file>-->
 
-    <exclude name="PSR2.NamingConventions.ValidClassName.Invalid" />
     <exclude-pattern>bootstrap/cache/*</exclude-pattern>
     <exclude-pattern>bootstrap/autoload.php</exclude-pattern>
     <exclude-pattern>*/migrations/*</exclude-pattern>

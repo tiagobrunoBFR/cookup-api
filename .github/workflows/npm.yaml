@@ -1,0 +1,15 @@
+name: Npm Workflow
+on:
+  push:
+    paths:
+      - 'resources/js/*'
+
+
+  jobs:
+    build:
+      name: Npm Workflow
+      runs-on: ubuntu-18.04
+      steps:
+        - uses: actions/checkout@v1
+        - run: npm install
+        - run: npm run production

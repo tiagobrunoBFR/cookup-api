@@ -1,0 +1,8 @@
+name: 'composer-install'
+description: 'Runs PHP Composer'
+
+run:
+    using: 'Doker'
+    image: 'Dokerfile'
+#branding:
+#  icon: "download"
