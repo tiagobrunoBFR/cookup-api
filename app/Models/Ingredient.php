@@ -10,4 +10,9 @@ class Ingredient extends Model
         'name',
         'image_id'
     ];
+
+    public function image()
+    {
+        return $this->belongsTo(File::class, 'image_id', 'id');
+    }
 }

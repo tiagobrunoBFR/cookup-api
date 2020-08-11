@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IngredientRequest;
+use App\Http\Resources\IngredientResource;
+use App\Models\Ingredient;
 use App\Services\Ingredient\IngredientCreateService;
 use Illuminate\Http\Request;
 
@@ -32,7 +34,7 @@ class IngredientController extends Controller
     {
         $ingredient = $ingredientCreateService->create($request->name, $request->file('image'));
 
-        return response()->json($ingredient, 201);
+        return new IngredientResource($ingredient->load('image'));
     }
 
     /**
