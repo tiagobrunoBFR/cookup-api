@@ -16,7 +16,7 @@ class CreateIngredientsTable extends Migration
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('image_id')->constrained('files');
+            $table->foreignId('image_id')->constrained('files')->onDelete('cascade');
             $table->timestamps();
         });
     }

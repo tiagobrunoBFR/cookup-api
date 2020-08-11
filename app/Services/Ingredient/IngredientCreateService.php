@@ -8,38 +8,36 @@ use Illuminate\Support\Facades\DB;
 
 class IngredientCreateService
 {
-    private $ingredient;
 
-    public function __construct(Ingredient $ingredient)
+    private $name;
+    private $image;
+
+    public function __construct(string $name, object $image)
     {
-        $this->ingredient = $ingredient;
+        $this->name = $name;
+        $this->image = $image;
     }
 
-    public function create(string $name, object $image): Ingredient
+    public function __invoke(): Ingredient
     {
-        DB::beginTransaction();
-        $image_id = $this->upload($image);
-        $ingredient = $this->make($name, $image_id);
-        DB::commit();
+
+        $ingredient = $this->make();
+
         return $ingredient;
     }
 
-    private function upload(object $image): int
+    private function make(): Ingredient
     {
-        $path = 'ingredients';
 
-        $image = new FileUploadService($path, $image);
-
-        return $image()->id;
-    }
-
-    private function make(string $name, int $image_id): Ingredient
-    {
+        DB::beginTransaction();
+        $image = new FileUploadService('ingredients', $this->image);
 
         $ingredient = Ingredient::create([
-            'name' => $name,
-            'image_id' => $image_id,
+            'name' => $this->name,
+            'image_id' => $image()->id,
         ]);
+
+        DB::commit();
 
         return $ingredient;
     }
