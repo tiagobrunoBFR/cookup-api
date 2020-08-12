@@ -8,6 +8,7 @@ use App\Http\Requests\Ingredient\IngredientCreateRequest;
 use App\Http\Resources\IngredientResource;
 use App\Models\Ingredient;
 use App\Services\Ingredient\IngredientCreateService;
+use App\Services\Ingredient\IngredientDeleteService;
 use App\Services\Ingredient\IngredientShowService;
 use App\Services\Ingredient\IngredientUpdateService;
 use Illuminate\Http\Request;
@@ -83,6 +84,12 @@ class IngredientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ingredient = new IngredientDeleteService($id);
+
+        if ($ingredient()) {
+            return response()->json([], 204);
+        }
+
+        return response()->json(['error' => 'Not Found'], 404);
     }
 }
