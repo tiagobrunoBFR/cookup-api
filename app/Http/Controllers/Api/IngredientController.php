@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Ingredient\IngredientUpdateRequest;
 use App\Http\Requests\Ingredient\IngredientCreateRequest;
 use App\Http\Resources\IngredientResource;
-use App\Models\Ingredient;
 use App\Services\Ingredient\IngredientCreateService;
 use App\Services\Ingredient\IngredientDeleteService;
+use App\Services\Ingredient\IngredientListService;
 use App\Services\Ingredient\IngredientShowService;
 use App\Services\Ingredient\IngredientUpdateService;
 use Illuminate\Http\Request;
@@ -22,9 +22,11 @@ class IngredientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $ingredients = new IngredientListService($request);
+
+        return IngredientResource::collection($ingredients()->with('image')->paginate());
     }
 
     /**
