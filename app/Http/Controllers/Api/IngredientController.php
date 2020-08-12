@@ -8,6 +8,7 @@ use App\Http\Requests\Ingredient\IngredientCreateRequest;
 use App\Http\Resources\IngredientResource;
 use App\Models\Ingredient;
 use App\Services\Ingredient\IngredientCreateService;
+use App\Services\Ingredient\IngredientShowService;
 use App\Services\Ingredient\IngredientUpdateService;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,13 @@ class IngredientController extends Controller
      */
     public function show($id)
     {
-        //
+        $ingredient = new IngredientShowService($id);
+
+        if ($ingredient()) {
+            return new IngredientResource($ingredient()->load('image'));
+        }
+
+        return response()->json(['error' => 'Not Found'], 404);
     }
 
     /**
