@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseApi;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ingredient\IngredientUpdateRequest;
 use App\Http\Requests\Ingredient\IngredientCreateRequest;
@@ -57,7 +58,7 @@ class IngredientController extends Controller
             return new IngredientResource($ingredient()->load('image'));
         }
 
-        return response()->json(['error' => 'Not Found'], 404);
+        return  ResponseApi::json(ResponseApi::NOT_FOUND['status']);
     }
 
     /**
@@ -75,7 +76,7 @@ class IngredientController extends Controller
             return new IngredientResource($ingredient()->load('image'));
         }
 
-        return response()->json(['error' => 'Not Found'], 404);
+        return  ResponseApi::json(ResponseApi::NOT_FOUND['status']);
     }
 
     /**
@@ -89,9 +90,9 @@ class IngredientController extends Controller
         $ingredient = new IngredientDeleteService($id);
 
         if ($ingredient()) {
-            return response()->json([], 204);
+            return  ResponseApi::json(ResponseApi::NO_CONTENT['status']);
         }
 
-        return response()->json(['error' => 'Not Found'], 404);
+        return  ResponseApi::json(ResponseApi::NOT_FOUND['status']);
     }
 }

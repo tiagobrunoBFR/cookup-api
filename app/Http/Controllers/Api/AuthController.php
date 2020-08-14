@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseApi;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterUserRequest;
 use App\Models\User;
@@ -29,7 +30,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return  ResponseApi::json(ResponseApi::UNAUTHORIZED['status']);
         }
 
         return $this->respondWithToken($token);

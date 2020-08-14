@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Ingredient;
 
+use App\Helpers\ResponseApi;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -39,6 +40,6 @@ class IngredientUpdateRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors()], 422));
+        throw new HttpResponseException(ResponseApi::json(ResponseApi::UNPROCESSABLE_ENTITY['status'], ['errors' => $validator->errors()]));
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Requests\Ingredient;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Helpers\ResponseApi;
 
 class IngredientCreateRequest extends FormRequest
 {
@@ -32,7 +33,6 @@ class IngredientCreateRequest extends FormRequest
     }
 
 
-
     /**
      * Failed validation disable redirect
      *
@@ -40,6 +40,6 @@ class IngredientCreateRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors()], 422));
+        throw new HttpResponseException(ResponseApi::json(ResponseApi::UNPROCESSABLE_ENTITY['status'], ['errors' => $validator->errors()]));
     }
 }
