@@ -28,7 +28,7 @@ class IngredientUpdateRequest extends FormRequest
     public function rules(Request $request)
     {
         return [
-            'name' => 'required|unique:ingredients,name,'.$request->route('id'),
+            'name' => 'required|unique:ingredients,name,' . $request->route('id'),
             'image' => 'nullable|image'
         ];
     }
@@ -40,6 +40,11 @@ class IngredientUpdateRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(ResponseApi::json(ResponseApi::UNPROCESSABLE_ENTITY['status'], ['errors' => $validator->errors()]));
+        throw new HttpResponseException(
+            ResponseApi::json(
+                ResponseApi::UNPROCESSABLE_ENTITY['status'],
+                ['errors' => $validator->errors()]
+            )
+        );
     }
 }

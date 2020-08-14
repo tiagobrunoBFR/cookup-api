@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Services\Ingredient;
-
 
 use App\Models\Ingredient;
 

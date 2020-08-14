@@ -40,6 +40,11 @@ class RegisterUserRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(ResponseApi::json(ResponseApi::UNPROCESSABLE_ENTITY['status'], ['errors' => $validator->errors()]));
+        throw new HttpResponseException(
+            ResponseApi::json(
+                ResponseApi::UNPROCESSABLE_ENTITY['status'],
+                ['errors' => $validator->errors()]
+            )
+        );
     }
 }

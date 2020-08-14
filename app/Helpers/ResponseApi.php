@@ -75,5 +75,4 @@ class ResponseApi
         }
         return self::$instance;
     }
-
 }
