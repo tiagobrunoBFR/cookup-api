@@ -4,21 +4,6 @@ namespace App\Helpers;
 
 class ResponseApi
 {
-    protected static $instance;
-
-    private function __construct()
-    {
-    }
-
-    private function __clone()
-    {
-    }
-
-    private function __wakeup()
-    {
-    }
-
-
     const NOT_FOUND = ['status' => 404, 'data' => ['error' => 'Not Found']];
     const UNAUTHORIZED = ['status' => 401, 'data' => ['error' => 'Unauthorized']];
     const OK = ['status' => 200, 'data' => 'Ok'];
@@ -68,11 +53,4 @@ class ResponseApi
         return response()->json($data ? $data : $result['data'], $result['status']);
     }
 
-    public static function getInstance(): self
-    {
-        if (empty(self::$instance)) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
 }
